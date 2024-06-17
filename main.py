@@ -1,34 +1,48 @@
-import numpy as np
+import time
+import streamlit as st
+from DataScraping import DataScraper
+from statistics_of_teams.calculation_of_averages import StatsCalculator
+from statistics_of_teams.monte_carlo_simulation import MonteCarloSimulator
+
+def main():
+    st.title("Simulação de Monte Carlo de Jogos de Futebol")
+    placeholder = st.empty()
+    team1_name = st.text_input("Nome do Time 1", "flamengo")
+    team2_name = st.text_input("Nome do Time 2", "palmeiras")
+
+    if st.button("Executar Simulação"):
+        with st.spinner("Realizando simulação, aguarde..."):
+            try:
+                scraper1 = DataScraper(team1_name)
+                scraper2 = DataScraper(team2_name)
+                
+                team1_results = scraper1.get_results()
+                team2_results = scraper2.get_results()
+                
+                calculator = StatsCalculator()
+                team1_averages = calculator.calculate_averages(team1_results)
+                team2_averages = calculator.calculate_averages(team2_results)
+                
+                simulator = MonteCarloSimulator()
+                team1_strength = simulator.calculate_team_strength(team1_averages)
+                team2_strength = simulator.calculate_team_strength(team2_averages)
+                print(f'Team 1 strength: {team1_strength}')
+                print(f'Team 2 strength: {team2_strength}')
+                simulation_results = simulator.monte_carlo_simulation(team1_strength, team2_strength)
+                total_simulations = sum(simulation_results.values())
+
+                placeholder.success("Simulação realizada com sucesso!")
+                time.sleep(3)
+                placeholder.empty()
+                
+                st.write(f"Probabilidade de Vitória do {team1_name}: {simulation_results['team1'] / total_simulations:.2%}")
+                st.write(f"Probabilidade de Vitória do {team2_name}: {simulation_results['team2'] / total_simulations:.2%}")
+                st.write(f"Probabilidade de Empate: {simulation_results['draw'] / total_simulations:.2%}")
+            except Exception as e:
+                placeholder.error(f"Não foi possível realizar a simulação. Tentar novamente mais tarde.")
+                time.sleep(3)
+                placeholder.empty()
 
 
-# Simular o resultado de um jogo entre dois times
-def simulate_game(team1_strength, team2_strength):
-    team1_score = np.random.poisson(team1_strength)
-    team2_score = np.random.poisson(team2_strength)
-    if team1_score > team2_score:
-        return 'team1'
-    elif team2_score > team1_score:
-        return 'team2'
-    else:
-        return 'draw'
-
-
-# Executar a simulação de Monte Carlo
-def monte_carlo_simulation(team1_strength, team2_strength, num_simulations=10000):
-    results = {'team1': 0, 'team2': 0, 'draw': 0}
-    for _ in range(num_simulations):
-        result = simulate_game(team1_strength, team2_strength)
-        results[result] += 1
-    return results
-
-
-# Exemplo de uso
-team1_strength = 1.5  # Força do time 1 (exemplo)
-team2_strength = 1.2  # Força do time 2 (exemplo)
-
-results = monte_carlo_simulation(team1_strength, team2_strength)
-total_simulations = sum(results.values())
-
-print(f"Team 1 Win Probability: {results['team1'] / total_simulations:.2%}")
-print(f"Team 2 Win Probability: {results['team2'] / total_simulations:.2%}")
-print(f"Draw Probability: {results['draw'] / total_simulations:.2%}")
+if __name__ == "__main__":
+    main()
