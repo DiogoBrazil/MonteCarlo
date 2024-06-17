@@ -24,26 +24,30 @@ Ao final, é gerado um gráfico com as probabilidades.
 
 ## Instalação
 
-1. Clone o repositório:
+### 1. Clone o repositório:
 
-  ```bash
+  ```
   git clone https://github.com/DiogoBrazil/monte-carlo-simulation.git
+  ```
 
-2. Navegue até o diretório do projeto:
+### 2. Navegue até o diretório do projeto:
 
-  ```bash
+  ```
   cd monte-carlo-simulation
+ ```
 
-3. Crie um ambiente virtual e ative-o:
+### 3. Crie um ambiente virtual e ative-o:
 
-  ```bash
+  ```
   python -m venv env
   source env/bin/activate  # No Windows, use `env\\Scripts\\activate`
+ ```
 
-4. Instale as dependências:
+### 4. Instale as dependências:
 
-  ```bash
+  ```
   pip install -r requirements.txt
+ ```
 
 ## Autor
 
