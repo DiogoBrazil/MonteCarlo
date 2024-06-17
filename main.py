@@ -1,8 +1,10 @@
 import time
 import streamlit as st
+import matplotlib.pyplot as plt
 from DataScraping import DataScraper
 from statistics_of_teams.calculation_of_averages import StatsCalculator
 from statistics_of_teams.monte_carlo_simulation import MonteCarloSimulator
+from utils.plot_results import plot_results
 
 def main():
     st.title("Simulação de Monte Carlo de Jogos de Futebol")
@@ -35,9 +37,7 @@ def main():
                 time.sleep(3)
                 placeholder.empty()
                 
-                st.write(f"Probabilidade de Vitória do {team1_name}: {simulation_results['team1'] / total_simulations:.2%}")
-                st.write(f"Probabilidade de Vitória do {team2_name}: {simulation_results['team2'] / total_simulations:.2%}")
-                st.write(f"Probabilidade de Empate: {simulation_results['draw'] / total_simulations:.2%}")
+                plot_results(simulation_results, team1_name, team2_name)
             except Exception as e:
                 placeholder.error(f"Não foi possível realizar a simulação. Tentar novamente mais tarde.")
                 time.sleep(3)

@@ -14,6 +14,7 @@ class MonteCarloSimulator:
 
     @staticmethod
     def simulate_game(team1_strength, team2_strength):
+        # Isto gera um número aleatório que representa o número de gols do Time
         team1_score = np.random.poisson(team1_strength)
         team2_score = np.random.poisson(team2_strength)
         if team1_score > team2_score:
