@@ -18,7 +18,7 @@ Uma média é calculada desses últimos 5 jogos. Em seguida, usando esses parâm
 
 Essa força é repassada para a função que faz o cálculo de Monte Carlo para prever um número aleatório que representa a quantidade de gols, usando para isso a distribuição de Poisson.
 
-As probabilidades de vitória de cada time e de empate são calculadas dividindo o número de ocorrências de cada resultado pelo número total de simulações
+As probabilidades de vitória de cada time e de empate são calculadas dividindo o número de ocorrências de cada resultado pelo número total de simulações qaue será definido a critério da regra de negócio.
 
 Ao final, é gerado um gráfico com as probabilidades.
 
