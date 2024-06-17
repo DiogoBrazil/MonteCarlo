@@ -5,12 +5,13 @@ from DataScraping import DataScraper
 from statistics_of_teams.calculation_of_averages import StatsCalculator
 from statistics_of_teams.monte_carlo_simulation import MonteCarloSimulator
 from utils.plot_results import plot_results
+from utils.process_team_name import remove_accents_and_insert_underlining
 
 def main():
     st.title("Simulação de Monte Carlo de Jogos de Futebol")
     placeholder = st.empty()
-    team1_name = st.text_input("Nome do Time 1", "flamengo")
-    team2_name = st.text_input("Nome do Time 2", "palmeiras")
+    team1_name = remove_accents_and_insert_underlining(st.text_input("Nome do Time 1"))
+    team2_name = remove_accents_and_insert_underlining(st.text_input("Nome do Time 2"))
 
     if st.button("Executar Simulação"):
         with st.spinner("Realizando simulação, aguarde..."):
@@ -38,6 +39,7 @@ def main():
                 
                 plot_results(simulation_results, team1_name, team2_name)
             except Exception as e:
+                print(e)
                 placeholder.error(f"Não foi possível realizar a simulação. Tentar novamente mais tarde.")
                 time.sleep(3)
                 placeholder.empty()
