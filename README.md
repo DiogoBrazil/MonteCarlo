@@ -1,6 +1,6 @@
 # Simulação de Monte Carlo para Previsão de Resultados de Jogos de Futebol
 
-O projeto tem por objetivo realizar o cálculo da simulação de Monte Carlo e ter como resultado a probabilidade de um confronto entre dois times, prevendo a vitória de um deles ou o empate.
+O projeto tem por objetivo realizar o cálculo da simulação de Monte Carlo e ter como resultado a probabilidade de um confronto entre dois times, prevendo a porcentagem de vitória de um deles ou o empate.
 
 ## Descrição do Projeto
 
