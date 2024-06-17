@@ -28,8 +28,7 @@ def main():
                 simulator = MonteCarloSimulator()
                 team1_strength = simulator.calculate_team_strength(team1_averages)
                 team2_strength = simulator.calculate_team_strength(team2_averages)
-                print(f'Team 1 strength: {team1_strength}')
-                print(f'Team 2 strength: {team2_strength}')
+                
                 simulation_results = simulator.monte_carlo_simulation(team1_strength, team2_strength)
                 total_simulations = sum(simulation_results.values())
 

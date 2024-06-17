@@ -5,6 +5,7 @@ def plot_results(results, team1_name, team2_name):
     labels = [f"Vitória do {team1_name}", "Empate", f"Vitória do {team2_name}"]
     counts = [results['team1'], results['draw'], results['team2']]
     total = sum(counts)
+    # As probabilidades de vitória de cada time e de empate são calculadas dividindo o número de ocorrências de cada resultado pelo número total de simulações
     probabilities = [count / total for count in counts]
 
     fig, ax = plt.subplots(figsize=(6, 4))
